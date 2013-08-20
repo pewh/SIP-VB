@@ -13,6 +13,15 @@
         End If
     End Sub
 
+    Sub refreshTotalLabel()
+        Dim total As Integer
+        For index = 0 To bufferTable.Rows.Count - 1
+            total += bufferTable.Rows(index)("Total")
+        Next
+
+        lblTotal.Text = total.ToString("c", New Globalization.CultureInfo("id-ID", False))
+    End Sub
+
     Private Sub TransaksiPenjualan_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
         FakturPembelian.refreshData()
     End Sub
@@ -38,21 +47,22 @@
     End Sub
 
     Private Sub cbPelanggan_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbPelanggan.SelectedIndexChanged
-        If datagrid.RowCount > 0 Then
-            If cbPelanggan.SelectedIndex <> prevSelectedIndex Then
-                If MsgBox("Mengganti nama pelanggan dapat menyebabkan faktur akan dihapus. Apakah Anda yakin?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
-                    txtCariBarang.Clear()
-                    bufferTable.Clear()
-                    datagrid.DataSource = bufferTable
-                Else
-                    cbPelanggan.SelectedIndex = prevSelectedIndex
-                End If
-            End If
-        Else
-            txtCariBarang.Clear()
-        End If
+        'If datagrid.RowCount > 0 Then
+        'If cbPelanggan.SelectedIndex <> prevSelectedIndex Then
+        'If MsgBox("Mengganti nama pelanggan dapat menyebabkan faktur akan dihapus. Apakah Anda yakin?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
+        'txtCariBarang.Clear()
+        'bufferTable.Clear()
+        'datagrid.DataSource = bufferTable
+        'refreshTotalLabel()
+        'Else
+        'cbPelanggan.SelectedIndex = prevSelectedIndex
+        'End If
+        'End If
+        'Else
+        'txtCariBarang.Clear()
+        'End If
 
-        prevSelectedIndex = cbPelanggan.SelectedIndex
+        'prevSelectedIndex = cbPelanggan.SelectedIndex
 
         lblNamaPelanggan.Text = cbPelanggan.Text.Split(" | ")(2)
     End Sub
@@ -130,6 +140,7 @@
             bufferTable.Clear()
             datagrid.DataSource = bufferTable
             disableClearButtonIfEmpty()
+            refreshTotalLabel()
         End If
     End Sub
 
@@ -138,6 +149,7 @@
             bufferTable.Rows(datagrid.CurrentRow.Index).Delete()
             datagrid.DataSource = bufferTable
             disableClearButtonIfEmpty()
+            refreshTotalLabel()
         End If
     End Sub
 

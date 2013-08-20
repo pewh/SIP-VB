@@ -13,12 +13,22 @@
         End If
     End Sub
 
+    Sub refreshTotalLabel()
+        Dim total As Integer
+        For index = 0 To bufferTable.Rows.Count - 1
+            total += bufferTable.Rows(index)("Total")
+        Next
+
+        lblTotal.Text = total.ToString("c", New Globalization.CultureInfo("id-ID", False))
+    End Sub
+
     Private Sub TransaksiPembelian_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
         FakturPembelian.refreshData()
     End Sub
 
     Private Sub TransaksiPembelian_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        fetchToCombobox(cbPemasok, "SELECT kode FROM Pemasok")
+        fetchToCombobox(cbPemasok, "SELECT kode + ' | ' + nama FROM Pemasok")
+
         If cbPemasok.Items.Count > 0 Then
             cbPemasok.SelectedIndex = 0
         End If
@@ -40,16 +50,17 @@
             If cbPemasok.SelectedIndex <> prevSelectedIndex Then
                 If MsgBox("Mengganti kode pemasok dapat menyebabkan faktur akan dihapus. Apakah Anda yakin?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
                     txtCariBarang.Clear()
-                    fetchToListbox(lstDaftarBarang, "SELECT Barang.nama FROM Barang INNER JOIN Pemasok ON Barang.kode_pemasok = Pemasok.kode WHERE NOT Barang.kode LIKE '%_deleted%' AND Pemasok.kode = '" & cbPemasok.Text & "'")
+                    fetchToListbox(lstDaftarBarang, "SELECT Barang.nama FROM Barang INNER JOIN Pemasok ON Barang.kode_pemasok = Pemasok.kode WHERE NOT Barang.kode LIKE '%_deleted%' AND Pemasok.kode = '" & cbPemasok.Text.Split(" | ")(0) & "'")
                     bufferTable.Clear()
                     datagrid.DataSource = bufferTable
+                    refreshTotalLabel()
                 Else
                     cbPemasok.SelectedIndex = prevSelectedIndex
                 End If
             End If
         Else
             txtCariBarang.Clear()
-            fetchToListbox(lstDaftarBarang, "SELECT Barang.nama FROM Barang INNER JOIN Pemasok ON Barang.kode_pemasok = Pemasok.kode WHERE NOT Barang.kode LIKE '%_deleted%' AND Pemasok.kode = '" & cbPemasok.Text & "'")
+            fetchToListbox(lstDaftarBarang, "SELECT Barang.nama FROM Barang INNER JOIN Pemasok ON Barang.kode_pemasok = Pemasok.kode WHERE NOT Barang.kode LIKE '%_deleted%' AND Pemasok.kode = '" & cbPemasok.Text.Split(" | ")(0) & "'")
         End If
 
         prevSelectedIndex = cbPemasok.SelectedIndex
@@ -119,6 +130,7 @@
             datagrid.DataSource = bufferTable
             disableClearButtonIfEmpty()
         End If
+        refreshTotalLabel()
     End Sub
 
     Private Sub btnHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHapus.Click
@@ -126,6 +138,7 @@
             bufferTable.Rows(datagrid.CurrentRow.Index).Delete()
             datagrid.DataSource = bufferTable
             disableClearButtonIfEmpty()
+            refreshTotalLabel()
         End If
     End Sub
 

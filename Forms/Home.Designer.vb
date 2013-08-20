@@ -43,8 +43,10 @@ Partial Class Home
         Me.menuLunasBelumTransaksiPembelian = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuLunasBelumTransaksiPenjualan = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.picBG = New System.Windows.Forms.PictureBox()
         Me.menuLaporanLabaRugi = New System.Windows.Forms.ToolStripButton()
+        Me.picBG = New System.Windows.Forms.PictureBox()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.menuPengeluaranOperasional = New System.Windows.Forms.ToolStripButton()
         Me.menuToolbar.SuspendLayout()
         CType(Me.picBG, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,10 +56,10 @@ Partial Class Home
         '
         'menuToolbar
         '
-        Me.menuToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuBarang, Me.ToolStripSeparator1, Me.menuPemasok, Me.ToolStripSeparator2, Me.menuPembeli, Me.ToolStripSeparator3, Me.menuFakturBeli, Me.ToolStripSeparator4, Me.menuFakturJual, Me.ToolStripSeparator5, Me.menuTransaksiPembelian, Me.ToolStripSeparator6, Me.menuTransaksiPenjualan, Me.ToolStripSeparator7, Me.menuStatusTransaksi, Me.ToolStripSeparator8, Me.menuLaporanLabaRugi})
+        Me.menuToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuBarang, Me.ToolStripSeparator1, Me.menuPemasok, Me.ToolStripSeparator2, Me.menuPembeli, Me.ToolStripSeparator3, Me.menuFakturBeli, Me.ToolStripSeparator4, Me.menuFakturJual, Me.ToolStripSeparator5, Me.menuTransaksiPembelian, Me.ToolStripSeparator6, Me.menuTransaksiPenjualan, Me.ToolStripSeparator9, Me.menuPengeluaranOperasional, Me.ToolStripSeparator7, Me.menuStatusTransaksi, Me.ToolStripSeparator8, Me.menuLaporanLabaRugi})
         Me.menuToolbar.Location = New System.Drawing.Point(0, 0)
         Me.menuToolbar.Name = "menuToolbar"
-        Me.menuToolbar.Size = New System.Drawing.Size(873, 25)
+        Me.menuToolbar.Size = New System.Drawing.Size(905, 25)
         Me.menuToolbar.TabIndex = 41
         Me.menuToolbar.Text = "Home"
         '
@@ -186,6 +188,15 @@ Partial Class Home
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
         '
+        'menuLaporanLabaRugi
+        '
+        Me.menuLaporanLabaRugi.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.menuLaporanLabaRugi.Image = CType(resources.GetObject("menuLaporanLabaRugi.Image"), System.Drawing.Image)
+        Me.menuLaporanLabaRugi.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.menuLaporanLabaRugi.Name = "menuLaporanLabaRugi"
+        Me.menuLaporanLabaRugi.Size = New System.Drawing.Size(100, 22)
+        Me.menuLaporanLabaRugi.Text = "Laporan Lapa Rugi"
+        '
         'picBG
         '
         Me.picBG.Image = Global.MarketStore.My.Resources.Resources.logo
@@ -196,27 +207,31 @@ Partial Class Home
         Me.picBG.TabStop = False
         Me.picBG.Visible = False
         '
-        'menuLaporanLabaRugi
+        'ToolStripSeparator9
         '
-        Me.menuLaporanLabaRugi.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.menuLaporanLabaRugi.Image = CType(resources.GetObject("menuLaporanLabaRugi.Image"), System.Drawing.Image)
-        Me.menuLaporanLabaRugi.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.menuLaporanLabaRugi.Name = "menuLaporanLabaRugi"
-        Me.menuLaporanLabaRugi.Size = New System.Drawing.Size(100, 22)
-        Me.menuLaporanLabaRugi.Text = "Laporan Lapa Rugi"
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 25)
+        '
+        'menuPengeluaranOperasional
+        '
+        Me.menuPengeluaranOperasional.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.menuPengeluaranOperasional.Image = CType(resources.GetObject("menuPengeluaranOperasional.Image"), System.Drawing.Image)
+        Me.menuPengeluaranOperasional.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.menuPengeluaranOperasional.Name = "menuPengeluaranOperasional"
+        Me.menuPengeluaranOperasional.Size = New System.Drawing.Size(131, 22)
+        Me.menuPengeluaranOperasional.Text = "Pengeluaran Operasional"
         '
         'Home
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(873, 311)
+        Me.ClientSize = New System.Drawing.Size(905, 25)
         Me.Controls.Add(Me.picBG)
         Me.Controls.Add(Me.menuToolbar)
         Me.IsMdiContainer = True
         Me.Name = "Home"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Home"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.menuToolbar.ResumeLayout(False)
         Me.menuToolbar.PerformLayout()
         CType(Me.picBG, System.ComponentModel.ISupportInitialize).EndInit()
@@ -246,4 +261,6 @@ Partial Class Home
     Friend WithEvents menuLunasBelumTransaksiPembelian As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents menuLunasBelumTransaksiPenjualan As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents menuLaporanLabaRugi As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents menuPengeluaranOperasional As System.Windows.Forms.ToolStripButton
 End Class

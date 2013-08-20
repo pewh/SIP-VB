@@ -6,17 +6,19 @@
         If cbKodePemasok.Items.Count > 0 Then
             cbKodePemasok.SelectedIndex = 0
         End If
+        exec("DELETE FROM Barang WHERE kode_pemasok = ''")
     End Sub
 
     Private Sub btnTambah_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTambah.Click
-        If exec(String.Format("AddNewItems '{0}', '{1}', '{2}', {3}, {4}",
+        If cbKodePemasok.SelectedIndex <> -1 And
+            exec(String.Format("AddNewItems '{0}', '{1}', '{2}', {3}, {4}",
                  txtKodeBarang.Text,
                  txtNamaBarang.Text,
                  cbKodePemasok.Text.Split(" | ")(0),
                  nmHargaBeli.Value,
                  nmHargaJual.Value)) Then
             MsgBox("Barang berhasil ditambah")
-            fetchToDatagrid(Barang.datagrid, "SELECT * FROM ShowAllItems WHERE NOT kode LIKE '%_deleted'")
+            fetchToDatagrid(Barang.datagrid, "SELECT * FROM ShowAllItems WHERE NOT kode LIKE '%_deleted%' ORDER BY nama", 3, 7)
             Dispose()
         Else
             MsgBox("Silahkan memasukan data dengan benar")

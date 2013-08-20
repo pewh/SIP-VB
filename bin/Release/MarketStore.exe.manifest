@@ -47,14 +47,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MarketStore.exe" size="312320">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MarketStore.exe" size="333824">
       <assemblyIdentity name="MarketStore" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>D6DlBTeI17UpsmThjjAgV1jrsVo=</dsig:DigestValue>
+        <dsig:DigestValue>EnCKNrX3gbT3VGLVMzZtnT6ePN8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

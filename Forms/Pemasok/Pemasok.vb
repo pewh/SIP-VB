@@ -60,34 +60,21 @@
     End Sub
 
     Private Sub btnHapus_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHapus.Click
-        Dim kodePemasok As String = "'" & datagrid.SelectedCells(0).Value & "'"
-        'Dim allRelatedItemsQuery As String = "SELECT nama FROM Barang WHERE kode_pemasok = " & kodePemasok
-        'Dim relatedItemsLength As Integer = countFetch(allRelatedItemsQuery)
-
-        'Dim konfirmasiPenghapusan As String = "Apakah Anda"
-
-        'konfirmasiPenghapusan = String.Format(
-        '    "Ada beberapa barang yang masih terikat dengan pemasok {0}. {1}" & _
-        '    "{2} {1}" & _
-        '    "Apakah Anda yakin untuk menghapus pemasok serta barang-barang di atas?",
-        '    datagrid.SelectedCells(1).Value,
-        '    Environment.NewLine,
-        '    String.Join(",", convertToArray(allRelatedItemsQuery))
-        ')
-
-        'If relatedItemsLength > 0 Then
-        If MsgBox("Apakah Anda yakin untuk menghapus?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
-            If exec("DELETE FROM Pemasok WHERE kode = " & kodePemasok) = False Then
-                MsgBox("Gagal menghapus data. Silahkan coba lagi.")
+        If datagrid.Rows.Count > 0 Then
+            Dim kodePemasok As String = "'" & datagrid.SelectedCells(0).Value & "'"
+            
+            If MsgBox("Apakah Anda yakin untuk menghapus?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
+                If exec("DELETE FROM Pemasok WHERE kode = " & kodePemasok) = False Then
+                    MsgBox("Gagal menghapus data. Silahkan coba lagi.")
+                End If
             End If
-        End If
-        'End If
 
-        fetchToDatagrid(datagrid, "SELECT * FROM Pemasok ORDER BY nama")
+            fetchToDatagrid(datagrid, "SELECT * FROM Pemasok ORDER BY nama")
+        End If
     End Sub
 
     Private Sub chkEditMode_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkEditMode.CheckedChanged
-        If chkEditMode.Checked Then
+        If chkEditMode.Checked And datagrid.Rows.Count > 0 Then
             gbDetail.Visible = True
             Height = heightWithoutGroupbox + gbDetail.Height + 15
             showDetailData()

@@ -60,19 +60,21 @@
     End Sub
 
     Private Sub btnHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHapus.Click
-        If MsgBox("Apakah Anda yakin untuk menghapus?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
-            Dim kodePemasok As String = "'" & datagrid.SelectedCells(0).Value & "'"
+        If datagrid.Rows.Count > 0 Then
+            If MsgBox("Apakah Anda yakin untuk menghapus?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
+                Dim kodePemasok As String = "'" & datagrid.SelectedCells(0).Value & "'"
 
-            If exec("DELETE FROM Pembeli WHERE kode = " & kodePemasok) = False Then
-                MsgBox("Gagal menghapus data. Silahkan coba lagi.")
+                If exec("DELETE FROM Pembeli WHERE kode = " & kodePemasok) = False Then
+                    MsgBox("Gagal menghapus data. Silahkan coba lagi.")
+                End If
+
+                fetchToDatagrid(datagrid, "SELECT * FROM Pembeli ORDER BY nama")
             End If
-
-            fetchToDatagrid(datagrid, "SELECT * FROM Pembeli ORDER BY nama")
         End If
     End Sub
 
     Private Sub chkEditMode_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkEditMode.CheckedChanged
-        If chkEditMode.Checked Then
+        If chkEditMode.Checked And datagrid.Rows.Count > 0 Then
             gbDetail.Visible = True
             Height = heightWithoutGroupbox + gbDetail.Height + 15
             showDetailData()

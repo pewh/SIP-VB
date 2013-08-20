@@ -98,7 +98,7 @@ Partial Class Barang
         '
         Me.txtCari.Location = New System.Drawing.Point(171, 252)
         Me.txtCari.Name = "txtCari"
-        Me.txtCari.Size = New System.Drawing.Size(111, 20)
+        Me.txtCari.Size = New System.Drawing.Size(121, 20)
         Me.txtCari.TabIndex = 3
         '
         'Label8

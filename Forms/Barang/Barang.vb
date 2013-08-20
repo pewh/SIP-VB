@@ -60,19 +60,21 @@
     End Sub
 
     Private Sub btnHapus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHapus.Click
-        Dim kodeBarang As String = "'" & datagrid.SelectedCells(0).Value & "'"
+        If datagrid.Rows.Count > 0 Then
+            Dim kodeBarang As String = "'" & datagrid.SelectedCells(0).Value & "'"
 
-        If MsgBox("Apakah Anda yakin untuk menghapus?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
-            If exec("SafelyDeleteItem " & kodeBarang) = False Then
-                MsgBox("Gagal menghapus barang. Coba lagi.")
+            If MsgBox("Apakah Anda yakin untuk menghapus?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
+                If exec("SafelyDeleteItem " & kodeBarang) = False Then
+                    MsgBox("Gagal menghapus barang. Coba lagi.")
+                End If
+
+                fetchToDatagrid(datagrid, "SELECT * FROM ShowAllItems WHERE NOT kode LIKE '%_deleted%' ORDER BY nama")
             End If
-
-            fetchToDatagrid(datagrid, "SELECT * FROM ShowAllItems WHERE NOT kode LIKE '%_deleted%' ORDER BY nama")
         End If
     End Sub
 
     Private Sub chkEditMode_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkEditMode.CheckedChanged
-        If chkEditMode.Checked Then
+        If chkEditMode.Checked And datagrid.Rows.Count > 0 Then
             gbDetail.Visible = True
             Height = heightWithoutGroupbox + gbDetail.Height + 15
             showDetailData()
@@ -135,25 +137,6 @@
     End Sub
 
     Private Sub btnCetak_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCetak.Click
-        Dim tglLabel, tgl, pembeliLabel, pembeli As String
-
-        tglLabel = "Tanggal: "
-        tgl = "12/3/2013"
-        pembeliLabel = "Pembeli: "
-        pembeli = "Udin"
-
-        Dim head As String = String.Format("{1}{2}{0}{3}{4}{0}{5}{6}{0}{7}{8}{0}{9}{10}",
-                                           "        ",
-                                           "Pembeli: ",
-                                           "Rudi",
-                                           "Total Barang: ",
-                                           15,
-                                           "Total stok: ",
-                                           32,
-                                           "Diskon: ",
-                                           "15%",
-                                           "Total harga: ",
-                                           1500000)
-        printPreview(datagrid, Home.printDoc, head)
+        printPreview(datagrid, Home.printDoc, "Daftar Barang")
     End Sub
 End Class

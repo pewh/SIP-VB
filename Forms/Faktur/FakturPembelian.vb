@@ -138,15 +138,17 @@
     End Sub
 
     Private Sub btnHapusFaktur_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHapusFaktur.Click
-        If MsgBox("Apakah Anda yakin untuk menghapus faktur " & lstFaktur.SelectedItem & "?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
-            If exec("HapusFakturBeli '" & lstFaktur.SelectedItem & "', 1") = True Then
-                MsgBox("Faktur berhasil dihapus")
-            Else
-                MsgBox("Faktur tidak bisa dihapus")
+        If lstFaktur.Items.Count > 0 Then
+            If MsgBox("Apakah Anda yakin untuk menghapus faktur " & lstFaktur.SelectedItem & "?", MsgBoxStyle.YesNo, "Peringatan") = MsgBoxResult.Yes Then
+                If exec("HapusFakturBeli '" & lstFaktur.SelectedItem & "', 1") = True Then
+                    MsgBox("Faktur berhasil dihapus")
+                Else
+                    MsgBox("Faktur tidak bisa dihapus")
+                End If
             End If
-        End If
 
-        refreshData()
+            refreshData()
+        End If
     End Sub
 
     Private Sub btnHapusSemuaFaktur_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHapusSemuaFaktur.Click

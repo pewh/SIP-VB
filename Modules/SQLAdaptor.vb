@@ -170,11 +170,11 @@ Module sqlAdaptor
             bayarLunas = 1
         End If
 
-        Dim query As String = String.Format("BEGIN TRANSACTION;INSERT INTO FakturJual VALUES('{0}', GetDate(), {1}, '{2}');",
+        Dim query As String = String.Format("BEGIN TRANSACTION;INSERT INTO FakturJual VALUES('{0}', GetDate(), {1}, {2}, '{3}');",
                                             kodeFaktur,
                                             diskon,
-                                            kodePelanggan,
-                                            bayarLunas)
+                                            bayarLunas,
+                                            kodePelanggan)
 
         For index = 0 To dt.Rows.Count - 1
             Dim kodeBarang As String = dt.Rows(index).Item("Kode")

@@ -76,12 +76,23 @@ CREATE TABLE DetailFakturJual (
 )
 GO
 
+CREATE TABLE PengeluaranOperasional (
+	nomor			VarChar(16) NOT NULL Primary Key,
+	nama			VarChar(30) NOT NULL,
+	jenis			VarChar(30) NOT NULL,
+	harga			Int NOT NULL,
+	tanggal			DateTime NOT NULL,
+	keterangan		VarChar(50) NOT NULL
+)
+GO
+
 -- create fixture
 EXEC sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'
 GO
 EXEC sp_MSForEachTable 'DELETE FROM ?'
 GO
 
+/*
 -- Pemasok
 INSERT INTO Pemasok VALUES ('P0001', 'Makmur Jaya', 'Jl Desa Makmur No. 22', '08132323')
 INSERT INTO Pemasok VALUES ('P0002', 'Sekip Jaya', 'Jl Kota Baru No. 1', '021232323')
@@ -131,6 +142,7 @@ INSERT INTO DetailFakturJual VALUES ('FJ001', 'I0003', 6)
 INSERT INTO DetailFakturJual VALUES ('FJ002', 'I0004', 4)
 INSERT INTO DetailFakturJual VALUES ('FJ002', 'I0005', 6)
 GO
+*/
 
 -- HelperBarang
 CREATE VIEW ShowAllItems AS
@@ -190,7 +202,7 @@ CREATE FUNCTION GetLatestDeleteID (@kode VarChar(16)) Returns SmallInt AS BEGIN
 		SET @delete_id = (
 			SELECT TOP 1 Convert(INT, Right(kode, 3))
 			FROM Barang
-			WHERE kode LIKE '12345_deleted%'
+			WHERE kode LIKE '%_deleted%'
 			ORDER BY kode DESC
 		)
 	END ELSE BEGIN
@@ -204,7 +216,7 @@ GO
 CREATE FUNCTION GenerateNewDeleteID (@kode VarChar(16)) Returns VarChar(16) AS BEGIN
 	DECLARE @new_id SmallInt
 	SET @new_id = dbo.GetLatestDeleteID(@kode) + 1
-	Return @kode + '_deleted' + Replicate('0', 3 - Len(@new_id)) + @new_id
+	Return @kode + '_deleted' + Cast(Replicate('0', 3 - Len(@new_id)) AS VarChar) + Cast(@new_id AS VarChar)
 END
 GO	
 

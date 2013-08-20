@@ -73,10 +73,10 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0D66BF8B438A2F1AF02ED3BF137E0A551DC1E20B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F89D5850138CA5C71C44AF24AE51D784FA5199AD</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MarketStore_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>MarketStore_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -186,6 +186,18 @@
     <Compile Include="Forms\Pelanggan\PembeliTambah.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\PengeluaranOperasional\PengeluaranOperasional.Designer.vb">
+      <DependentUpon>PengeluaranOperasional.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PengeluaranOperasional\PengeluaranOperasional.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PengeluaranOperasional\PengeluaranOperasionalTambah.Designer.vb">
+      <DependentUpon>PengeluaranOperasionalTambah.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PengeluaranOperasional\PengeluaranOperasionalTambah.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Transaksi\TransaksiPembelian.Designer.vb">
       <DependentUpon>TransaksiPembelian.vb</DependentUpon>
     </Compile>
@@ -257,6 +269,12 @@
     <EmbeddedResource Include="Forms\Pelanggan\PembeliTambah.resx">
       <DependentUpon>PembeliTambah.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PengeluaranOperasional\PengeluaranOperasional.resx">
+      <DependentUpon>PengeluaranOperasional.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PengeluaranOperasional\PengeluaranOperasionalTambah.resx">
+      <DependentUpon>PengeluaranOperasionalTambah.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Transaksi\TransaksiPembelian.resx">
       <DependentUpon>TransaksiPembelian.vb</DependentUpon>
     </EmbeddedResource>
@@ -271,6 +289,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="MarketStore_1_TemporaryKey.pfx" />
     <None Include="MarketStore_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
